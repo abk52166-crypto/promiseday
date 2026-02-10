@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Promise Day - Manaar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0d1b2a; /* Deep midnight blue */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Quicksand', sans-serif;
+            color: #e0e1dd;
+            padding: 30px 20px;
+            overflow-x: hidden;
+        }
+
+        .header { text-align: center; margin-bottom: 40px; z-index: 10; }
+        .header h1 { 
+            font-family: 'Dancing Script', cursive; 
+            color: #778da9; 
+            font-size: 2.8rem; 
+            text-shadow: 0 0 10px rgba(119, 141, 169, 0.5);
+        }
+
+        /* The Scroll */
+        .scroll {
+            background: #1b263b;
+            width: 100%;
+            max-width: 400px;
+            border-left: 4px solid #415a77;
+            padding: 30px;
+            border-radius: 0 20px 20px 0;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            transform: translateX(-10px);
+            opacity: 0;
+            animation: slideIn 1s forwards;
+        }
+
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .promise-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(119, 141, 169, 0.3);
+        }
+
+        .promise-item h3 {
+            font-family: 'Dancing Script', cursive;
+            color: #e0e1dd;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .promise-item p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #8a99af;
+        }
+
+        /* The Button */
+        .seal-btn {
+            background: #415a77;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .seal-btn:active { transform: scale(0.95); }
+
+        /* The Final Pop-up */
+        #final-msg {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .final-photo {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border: 8px solid white;
+            border-radius: 5px;
+            transform: rotate(-3deg);
+            margin-bottom: 20px;
+        }
+
+        /* Stars Background */
+        .star {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: twinkle 2s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="stars"></div>
+
+    <div class="header">
+        <h1>Promise Day</h1>
+        <p>A few words for you, Manaar...</p>
+    </div>
+
+    <div class="scroll">
+        <div class="promise-item">
+            <h3>I promise...</h3>
+            <p>To always be the person you can turn to, no matter how much noise the world is making. I am your safe place.</p>
+        </div>
+
+        <div class="promise-item">
+            <h3>I promise...</h3>
+            <p>To work hard every single day so that one day, there won't be any miles between us anymore. I'm coming for you.</p>
+        </div>
+
+        <div class="promise-item">
+            <h3>I promise...</h3>
+            <p>To never let a day go by without letting you know how much you are loved and appreciated. You are my priority.</p>
+        </div>
+
+        <div class="promise-item">
+            <h3>I promise...</h3>
+            <p>To keep every single one of these promises for as long as I live. You have my word and my heart.</p>
+        </div>
+
+        <button class="seal-btn" onclick="sealPromise()">SEAL THESE PROMISES</button>
+    </div>
+
+    <div id="final-msg">
+        <img src="pic1.jpg" alt="Us" class="final-photo">
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #778da9;">Promises Sealed.</h2>
+        <p style="margin-top: 15px;">I love you more than words can ever say, Manaar.</p>
+        <button onclick="document.getElementById('final-msg').style.display='none'" style="margin-top: 30px; background: none; border: 1px solid white; color: white; padding: 5px 15px; border-radius: 10px;">Back</button>
+    </div>
+
+    <script>
+        function sealPromise() {
+            document.getElementById('final-msg').style.display = 'flex';
+        }
+
+        // Star background
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
